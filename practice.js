@@ -1,5 +1,5 @@
 /////PRACTICE/////
-*
+***
 function home(){
     const list = ["apple","orange","banana"];
     list.push("watermelon")
@@ -7,19 +7,22 @@ function home(){
 }
 home();
 //const를 사용하더라도 배열과 오브젝트의 값을 변경하는 것은 가능하다.
-*
+
+***
 const list = ["apple","orange","banana"];
 list2 = [].concat(list,"watermelon");
 console.log(list2)/// ["apple","orange","banana","watermelon"]
 // immutable array를 만들었다. concat으로 데이터를 추가하면 원본인 list가 바뀌는것이 아닌 list를 복제한 복사본에 데이터를 추가해, 원본 데이터가 변경되지 않는다. (list === list2 =>false)
-*
+
+***
 let str = "hello world ! ^^ ~~";
 let matchstr= "hello";// matchstr에 입력된 string값만큼 str로부터 잘라내어 서로 비교한다.
 console.log(str.startsWith(matchstr));///true, 같지 않다면 false
 let matchstr1= "^ ~~";
 console.log(str.endsWith(matchstr1));///true, 같지 않다면 false
 console.log(str.includes("world"));///str안에 "world"이 포함 된다면 true
-*
+
+***
 var data = [1,2,undefined,NaN,null,""];
 Array.prototype.getIndex=function(){};
 -for(var i=0; i<data.length;i++){
@@ -40,13 +43,15 @@ var str = "hello !!";
 for(let value of str){
     console.log(value);///"h","e","l","l","o"," ","!","!"
 }
-*
+
+***
 let pre = ["apple","orange",100];
 let newData = [...pre];
 console.log(newData);///["apple","orange",100]
 console.log(pre === newData);///false, 두개는 다른 데이터, 기존에 참조를 끊고 새로운 데이터를 메모리에 새로 할당 받아 저장한다.
 //Spread Operator, 펼침연산자.
-*
+
+***
 let pre = [100,200,"hello",null];
 let newData = [0,1,2,3, ...pre, 4];
 console.log(newData);///[0,1,2,3,100,200,"hello",null, 4]
@@ -59,7 +64,8 @@ console.log(sum.apply(null,pre));///600
 //배열 그대로를 전달하고 싶을땐.apply를 쓴다. 첫번째 인자값은 그냥 null로 전달받고, 두번째 인자값에 배열명을 써주면 된다.
 console.log(sum(...pre));///600
 //배열형태의 인자값을 던져줄때 펼침 연산자를 쓰면 더 편리하다.
-*
+
+***
 //ES2015 from 메서드로 진짜 배열 만들기
 function addMark(){
     let newData = [];
@@ -80,7 +86,8 @@ function addMark(){
 console.log(newData);///["1!","2!","3!","4!","5!"]
 }
 addMark(1,2,3,4,5);
-*
+
+***
 //실습예제 1 /* filter,includes,from을 사용해서 문자열'e'가 포함된 노드로 구성된 배열을 만들어서 반환하기 */
 <html>
 <ul>
@@ -100,7 +107,8 @@ function print(){
     return eArray///
 }
 console.log(print());/// 3 
-*
+
+***
 //간단히 객체 생성하기
 const name ="crong";
 const age =33;
@@ -128,7 +136,8 @@ function getObj(){
 }
 var obj = getObj();//get object는 새로운 object 형태로 반환하고 싶을때 사용
 console.log(obj.getName());///"crong"
-*
+
+***
 //Destructuring Array
  let data = ["crong", "honux","jk","jinny"];
  let jisu = data[0];
@@ -136,7 +145,8 @@ console.log(obj.getName());///"crong"
 
  let [jisu,,jung] = data;//[jisu,,jung]은 data배열 중 0번째,2번째 배열에 저장되어있는 값(crong,jk)를 ([jisu(0번째),(1번째),jung(2번째)]) jisu,jung으로 쓰겠다고 하는것이다. 
  console.log(jisu,jung);///"crong" "jk"
-*
+
+ ***
 //Destructuring Object
 let obj = {
     name : "crong",
@@ -150,7 +160,8 @@ console.log(name.age);///"crong" 10
 let{name:myName, age:myAge}; = obj;//다른이름으로 저장해서 쓸 수도 있다.
 console.log(myName, myAge);///"crong" 10
 //destructuring을 잘 이용하면 필요한 데이터(array,object)에서 key값, {}를 사용하여 원하는 위치의 index를 뽑을수 있다.
-*
+
+***
 //Destructuring 활용 JSON파싱
 var news = [
     {
@@ -184,7 +195,8 @@ console.log(title, imgurl);/// "mbc" "http://mbcimage.com"
 
 let[,{title,imgurl}] = news;//[] Destructuring을 통해 두번째 인덱스 값을 뽑았고, {} object Destructuring를 통해 필요한 key값만 뽑을 수 있다.
 console.log(imgurl);///"http://mbcimage.com"
-*
+
+***
 //Destructuring 활용_Event객체전달
 var news = [
     {
