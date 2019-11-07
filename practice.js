@@ -1,4 +1,5 @@
 /////PRACTICE/////
+
 ***
 function home(){
     const list = ["apple","orange","banana"];
