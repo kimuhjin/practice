@@ -383,4 +383,81 @@ const SETTING = {
   console.log(SETTING.name);///"LUCKY LOTTO!"
   console.log(getRandomNumber(SETTING.maxNumber));///[a, b, c, d, e, f]
   
-  
+  ***
+  //Template 처리
+  const data = [
+    {
+        name : 'coffee-bin',
+        order : true,
+        items ; ['americano', 'milk', 'green-tea']
+    },
+    {
+        neam : 'starbucks'
+        order : false
+    }
+]
+//Template 처리는 UI계발에서 굉장히 중요한 작업이다. Json으로 응답을 받고, javascript object로 변환한 후에 어떠한 데이터처리 조작을 한 후에 dom애 추가.
+//실제로 dom에 추가하는 일이 UI개발에서 빈번하고 어려운 작업이다. 그 이유는 데이터 + HTML문자열의 결합이 필요하기 때문이다.
+
+const template = `<div>welcome $[data[0].name] !!`
+console.log(template);/// "<div>welcome coffee-bean !!"
+
+***
+//Tagged Template Literals
+const data = [
+    {
+        name : 'coffee-bin',
+        order : true,
+        items ; ['americano', 'milk', 'green-tea']
+    },
+    {
+        neam : 'starbucks'
+        order : false
+    }
+]
+function fn(tags, name, items){
+    console.log(tags);///["<div>welcome", !!</div><h2>주문가능항목</h2><div>, "</div>"]
+    if(typeof items ==="undefined"){
+        items = "주문가능한 상품이 없습니다";
+    }
+    return(tags[0] + name + tags[1] + items + tags[2]);
+}
+const template = fn`<div>welcome $[data[0].name] !!</div>
+    <h2>주문가능항목</h2><div>$[data[0].items]</div>`;
+console.log(template);///"<div>welcome coffee-bean !!</div> <h2>주문가능항목</h2><div>americano,milk,green-tea</div>"
+
+const template = fn`<div>welcome $[data[0].name] !!</div>
+    <h2>주문가능항목</h2><div>$[data[1].items]</div>`;
+console.log(template);///"<div>welcome starbucks !!</div> <h2>주문가능항목</h2><div>주문가능한 상품이 없습니다.</div>"
+
+data.forEach((v) => {
+    let template = fn`<div>welcome $[v.name] !!</div>
+    <h2>주문가능항목</h2><div>$[v.items]</div>`;
+    console.log(template);///"<div>welcome coffee-bean !!</div> <h2>주문가능항목</h2><div>americano,milk,green-tea</div>" "<div>welcome starbucks !!</div> <h2>주문가능항목</h2><div>주문가능한 상품이 없습니다.</div>"
+});
+
+***
+//Arrow function 활용
+setTimeout(function(){
+console.log("settimeout");/// "settimeout" (1초뒤에 실행 됨)
+},1000);//setTimeout은 JS callback 함수중 하나이다. 나중에 필요한 시점에 실행된다. 
+
+//function 을 "()=>"로도 쓸 수 있다.
+setTimeout( () => {
+    console.log("settime arrow");/// "settime arrow" (1초뒤에 실행 됨)
+    },1000);
+
+let newArr = [1,2,3,4,5].map(function(value, index, object){//callback 함수의 단점은 어떤 함수의 인자로 들어가는데, 그 인자에 있는 함수가 너무 길다는 점이다.
+    return value * 2;
+});
+console.log(newArr);///[2,4,6,8,10] 
+
+let newArr = [1,2,3,4,5].map( (v) => {//parameter가 value만 필요하기 때문에 v만 쓴다.
+    return v * 2; 
+});
+console.log("arrow newArr" , newArr);///[2,4,6,8,10]
+
+let newArr = [1,2,3,4,5].map( (v) => v * 2);//ES6 에선 return을 생략해서 쓸 수도 있다, .map()안에 있는 syntax를 유지하면서 안에 있는 코드가 callback함수 인것을 인식한다. =>뒤에 나와있는 state를 그대로 반환하게 돼있다. 짧은코드들은 brace( {},대괄호를 뜻함 )없이 간단하게 쓰는 경우가 많다. 
+console.log("arrow newArr" , newArr);///[2,4,6,8,10]
+//map이나 foreach,filter,reduce등 Array관련된 method를 쓸 때 callback 함수를 이용해 간단하게 코드를 짤 수 있다.
+
