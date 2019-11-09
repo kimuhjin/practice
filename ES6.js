@@ -248,7 +248,7 @@ let mySet = new Set();
 console.log(toString.call(mtSet));///[object Set], object에 Set이란 타입이 나온다.
 //set의 특장 : 중복없이 유일한 값을 저장하려고 할 때 & 이미 존재하는지 체크할 때 유용.
 
-mySet.add("crong");
+mySet.add("crong");//mySet안에 "crong"값을 추가한다.
 mySet.add("hary");
 mySet.add("crong");
 
@@ -348,3 +348,39 @@ Area.prototype.getArea = function(){
 }
 console.log(myarea.getArea());///200
 console.log(obj);///Object {height :10, width: 20} , 가비지 컬렉션이 전혀 되지 않은 상황이다. object값이 계속 유지 된다.
+
+***
+///실습 Destructuring and Set를 활용하여 Lotto 번호 만들기.
+//1.유일한 값을 추출하는 과정에는 set을 사용
+//2.getRandomNumber함수에 변수를 전달하는 과정에서 destructuring을 사용
+const SETTING = {
+    name : "LUCKY LOTTO!",
+    count : 6,
+    maxNumber : 45
+  }
+  
+  function getRandomNumber(maxNumber) {
+    const randomSet = new Set(); //randomSet에 new Set()을 할당, set()을 써 중복없이 유일한 값을 받아온다.
+    
+    for (let i = 0; i < SETTING.count;/*SETTING의 count 값을 받아옴*/ i++) {
+      let randomNumber; //randomNumber변수를 만듬 
+      
+      do {
+        randomNumber = Math.floor(Math.random() * (SETTING.maxNumber - 1)) + 1;
+        //Math.random() : 0에서 1사이의 값을 무작위로 할당받음 & Math.floor : 소수점을 제외시켜 정수를 얻음
+      } //randomNumber에 랜덤 값을 할당 받음
+      while (randomSet.has(randomNumber))//do while문은 while이 true일때만 동작한다. randomSet안에 randomNumber가 존재한다면 true를 반환받아 do문을 실행한다.
+      //여기서 do while문의 목적은 랜덤값을 할당 받을때 중복값이 들어올수 있는데, 중복값이 들어올 경우 do while문을 이용해 randomSet안에 이미 이전에 할당 받은 randomNumber값이 있을경우 true를 반환해 do문을 실행 시키고, randomSet에 할당받았던 값이 아닌 다른 숫자를 다시 받아온다. do while이 없다면 중복된 숫자들이 한번만 결과값으로 나오게 되어 최종 로또번호 갯수에 영향을 끼친다.
+
+      //중복이 없다면 do while문을 건너 뛰고 바로 다음 코드를 실행한다.
+
+      randomSet.add(randomNumber);//true라면 set의add기능을 이용하여 randomSet에 위에서 무작위로 만든 randomNumber값을 저장시킨다.
+    }
+    
+    return Array.from(randomSet).sort((a, b) => a - b)/*[#Q].sort를 안 써도 콘솔로 값이 잘 출력된다. 왜 써야 하는걸까? */;//randomset으로부터 나온 값들로 부터 배열을 만들어 배열을 function에 반환한다.
+  }
+
+  console.log(SETTING.name);///"LUCKY LOTTO!"
+  console.log(getRandomNumber(SETTING.maxNumber));///[a, b, c, d, e, f]
+  
+  
