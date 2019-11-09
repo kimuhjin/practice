@@ -461,3 +461,6 @@ let newArr = [1,2,3,4,5].map( (v) => v * 2);//ES6 에선 return을 생략해서 
 console.log("arrow newArr" , newArr);///[2,4,6,8,10]
 //map이나 foreach,filter,reduce등 Array관련된 method를 쓸 때 callback 함수를 이용해 간단하게 코드를 짤 수 있다.
 
+***
+//Arrow function 의 this context
+
