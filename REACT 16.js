@@ -284,4 +284,4 @@ class Controlled extends Component {
 /*
 <button>I have eaten 1,2,3,4,5...20pizzas</button>
 */
-///Return null을 setState해서 state를 죽이지 않고 교체한다.
+///Return null을 setState해서 state를 죽이지 않고 교체하여 업데이트를 하지 않는다. 그러므로 state를 업데이트 하지도, 컴포넌트를 업데이트 하지 않아도 된다.
